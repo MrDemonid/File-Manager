@@ -1,17 +1,23 @@
 @echo off
-del ..\fm\fm.com
+set SOURCES=.
+set BINARY=..\bin
+set ASM=..\ma80
+
+
+del %BINARY%\fm.com
+del fm.com
 del fm.rel
 cls
 
-..\Bin\ma80.exe fm,fm=fm
+%ASM%\ma80.exe fm,fm=fm
 if errorlevel == 1 goto error
 
-..\Bin\mlink fm
+%ASM%\mlink fm
 if errorlevel == 1 goto error
 
 if not exist fm.com goto error
 
-copy /b fm.com ..\fm\fm.com
+copy /b fm.com %BINARY%\fm.com
 
 del fm.com
 del fm.rel
